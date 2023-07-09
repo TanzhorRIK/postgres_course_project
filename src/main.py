@@ -20,10 +20,13 @@ def main():
     api.connect()
     data = api.get_vacancies()
     api.download_vacancies()
+
     # создаём экземпляр-менеджер БД класса
     db = DBManager()
+
     # удаляем БД, если она существовала
     db.delete_database("data_hh")
+
     # создаём базу данных(по-умолчанию имя "data_hh")
     db.create_database()
 
