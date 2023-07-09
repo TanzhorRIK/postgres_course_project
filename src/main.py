@@ -1,6 +1,7 @@
 from db_manager import DBManager
 from hh_api import HHVacancyAPI
 
+
 def main():
     """Основная функция"""
 

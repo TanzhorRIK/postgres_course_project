@@ -1,7 +1,9 @@
 import psycopg2
 
+
 class DBManager:
-    def __init__(self, host="localhost", database="data_hh", user="postgres", password="1234567"):
+    def __init__(self, host="localhost", database="data_hh", user="postgres",
+                 password="1234567"):
         self.host = host
         self.database = database
         self.user = user
@@ -44,7 +46,9 @@ class DBManager:
             cursor = connection.cursor()
 
             # Проверка существования базы данных
-            cursor.execute("SELECT 1 FROM pg_catalog.pg_database WHERE datname = %s", (database_name,))
+            cursor.execute(
+                "SELECT 1 FROM pg_catalog.pg_database WHERE datname = %s",
+                (database_name,))
             exists = cursor.fetchone()
 
             if exists:
@@ -60,7 +64,6 @@ class DBManager:
 
         except psycopg2.Error as e:
             print(f"Error deleting database: {e}")
-
 
     def connect(self):
         """Метод для установления соединения с БД"""
@@ -98,6 +101,7 @@ class DBManager:
 
         else:
             print("Not connected to the database!")
+
     def create_tables(self):
         """Метод для создания двух таблиц в БД"""
 
@@ -165,8 +169,9 @@ class DBManager:
                     "INSERT INTO vacancies (id, vacansies_name, employer_id, salary_min, salary_max, url) "
                     "VALUES (%s, %s, %s, %s, %s, %s) "
                     "ON CONFLICT (id) DO NOTHING",
-                    (item['id'], item['name'], item['employer']['id'], salary_from,
-                              salary_to, item['url']))
+                    (item['id'], item['name'], item['employer']['id'],
+                     salary_from,
+                     salary_to, item['url']))
                 self.connection.commit()
 
             print("Data added to the database successfully!")
@@ -236,8 +241,7 @@ class DBManager:
 
         return None
 
-
-    def get_vacancies_with_keyword(self, keyword:str) -> list:
+    def get_vacancies_with_keyword(self, keyword: str) -> list:
         """Метод для получения списка всех вакансий, в названии которых содержатся переданные в метод слова"""
         query = f"SELECT vacansies_name FROM vacancies WHERE vacansies_name ILIKE '%{keyword}%' ORDER BY vacansies_name"
         if self.connection:

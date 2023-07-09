@@ -2,6 +2,8 @@ import requests
 import json
 import os
 import time
+
+
 class HHVacancyAPI:
     """Класс для подключения к API hh.ru"""
 
@@ -48,6 +50,7 @@ class HHVacancyAPI:
 
             # Необязательная задержка, но чтобы не нагружать сервисы hh
             time.sleep(0.25)
+
     def get_vacancies(self):
         """Метод для получения данных по вакансиям из json-файла"""
 
