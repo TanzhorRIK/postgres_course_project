@@ -33,6 +33,8 @@ def main():
 
     # подключаемся к БД
     db.connect()
+
+    # удаляем таблицы, если они существовали
     db.drop_tables()
     # создаём таблицы
     db.create_tables()
